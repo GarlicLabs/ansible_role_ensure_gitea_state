@@ -1,0 +1,40 @@
+---
+
+- name: Use provided helm values
+  ansible.builtin.set_fact:
+    gitea_helm_values_template: "{{ gitea_value_path }}"
+  when: (gitea_value_path is defined) and (gitea_value_path|length>0)
+
+- name: Use default helm values
+  ansible.builtin.set_fact:
+    gitea_helm_values_template: "values.yml.j2"
+  when: (gitea_value_path is undefined) or (gitea_value_path|length == 0)
+
+- name: Set gitea helm values variable content
+  ansible.builtin.set_fact:
+    gitea_helm_values: "{{ lookup('template', gitea_helm_values_template) | from_yaml }}"
+
+- name: "Ensure gitea is {{ gitea_state }}"
+  kubernetes.core.helm:
+    kubeconfig: "{{ gitea_kubeconfig }}"
+    name: gitea
+    chart_repo_url: "https://charts.bitnami.com/bitnami"
+    chart_ref: gitea
+    release_namespace: "{{ gitea_namespace }}"
+    release_state: "{{ gitea_state }}"
+    chart_version: "{{ gitea_chart_version }}"
+    values: "{{ gitea_helm_values }}"
+  no_log: true
+
+- name: Wait till gitea is running
+  tags: notest
+  kubernetes.core.k8s_info:
+    kind: Deployment
+    wait: true
+    name: "{{ item }}"
+    namespace: "{{ gitea_namespace }}"
+    wait_sleep: 30
+    wait_timeout: 360
+  loop:
+    - gitea
+  when: gitea_state == "present"

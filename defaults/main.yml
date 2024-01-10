@@ -1,0 +1,8 @@
+---
+
+gitea_kubeconfig:  "{{ undef(hint='Specify path to your kubeconfig') }}"
+gitea_namespace: default
+gitea_chart_version: 1.2.10
+gitea_name: Gitea
+gitea_state: present
+gitea_value_path: # Set path to your own helm values file
