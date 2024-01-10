@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: false
   vars: 
-  - certmanager_kubeconfig: ""
+  - gitea_kubeconfig: ""
   tasks:
     - name: "Include garliclabs.ansible_role_ensure_gitea_state"
       ansible.builtin.include_role:
