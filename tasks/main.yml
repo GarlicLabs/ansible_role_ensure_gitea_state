@@ -24,7 +24,6 @@
     release_state: "{{ gitea_state }}"
     chart_version: "{{ gitea_chart_version }}"
     values: "{{ gitea_helm_values }}"
-  no_log: true
 
 - name: Wait till gitea is running
   tags: notest
