@@ -10,12 +10,12 @@ Kubernetes, Helm
 
 ## Role Variables
 
-**gitea_kubeconfig:** Path to the kubeconfig for your kubernetes cluster
-**gitea_namespace:** Kubernetes namespace to deploy gitea in
-**gitea_chart_version:** Version of gitea helm chart see: [bitnami gitea](https://artifacthub.io/packages/helm/bitnami/gitea)
-**gitea_name:** Name of your gitea!
-**gitea_state:** State of the deployment, can be either present or absent
-**gitea_value_path:** Path to your helm values file, if not set a minimal default values will be set except of the gitea name
+**gitea_kubeconfig:** Path to the kubeconfig for your kubernetes cluster  
+**gitea_namespace:** Kubernetes namespace to deploy gitea in  
+**gitea_chart_version:** Version of gitea helm chart see: [bitnami gitea](https://artifacthub.io/packages/helm/bitnami/gitea)  
+**gitea_name:** Name of your gitea!  
+**gitea_state:** State of the deployment, can be either present or absent  
+**gitea_value_path:** Path to your helm values file, if not set a minimal default values will be set except of the gitea name  
 
 ## Development
 
